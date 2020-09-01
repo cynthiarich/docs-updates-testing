@@ -1,0 +1,18 @@
+name: "docs-updates"
+on:
+ pull_request:
+ push:
+  branches:
+    - main
+    - 'releases/*'
+  paths-ignore:
+    - 'docs/*'
+
+jobs:
+ docs:
+  if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-docs') }}
+  runs-on: ubuntu-latest
+  steps:
+  - uses: cynthiarich/docs-updates@main
+    with:
+      config: 'docs-config.yml'
